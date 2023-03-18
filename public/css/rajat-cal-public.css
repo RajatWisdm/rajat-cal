@@ -2,3 +2,10 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ #schedule_form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  

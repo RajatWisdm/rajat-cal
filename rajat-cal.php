@@ -84,14 +84,37 @@ class RajatCal {
 
     function add_admin_pages() {
         add_menu_page( 'Rajat Calender', 'Rajat Calender', 'manage_options', 'rg_cal', array( $this, 'admin_page_markup' ), 'dashicons-calendar-alt', 100 );
+        add_submenu_page( 'rg_cal', 'Add Plan', 'Add Plan', 'manage_options', 'add_plan', array( $this, 'add_page_markup' ) );
     }
 
     function admin_page_markup() {
-        require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
+        require_once plugin_dir_path( __FILE__ ) . 'templates/calendar.php';
+    }
+
+    function add_page_markup() {
+        require_once plugin_dir_path( __FILE__ ) . 'templates/add-schedule.php';
     }
  }
 
  if ( class_exists( 'RajatCal' ) ){
     $cal = new RajatCal();
+
+	// JQUERY CDN LINKING
+	wp_register_style( 'jquery-datatable', 'https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css' );
+	wp_enqueue_style('jquery-datatable');
+	wp_register_script( 'jquery-datatable', 'https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js' );
+	wp_enqueue_script('jquery-datatable');
+	
+	
+	// BOOTSTRAP CDN LINKING
+	wp_register_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' );
+	wp_enqueue_style('bootstrap');
+	wp_register_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' );
+	wp_enqueue_script('bootstrap');
+
+	// CUSTOM STYLE
+	wp_register_style( 'wdm-custom-style', './public/css/rajat-cal-public.css' );
+	wp_enqueue_style('wdm-custom-style');
+
     $cal->register();
  }
